@@ -11,7 +11,7 @@ What if, instead of being able to climb 1 or 2 steps at a time, you could climb 
 #### My solution in JS
 ```javascript
 function staircase(X, n) {
-    return solution(X, n, [], 0)
+    return solution(X, n, 0)
 
     function solution(steps, n, result) {
         for (let i = 0; i < steps.length; i++) {
