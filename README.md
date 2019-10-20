@@ -1,7 +1,7 @@
-# Staircase problem
+## Staircase problem
 https://www.dailycodingproblem.com/blog/staircase-problem/
 
-## My solution in JS
+#### My solution in JS
 ```javascript
 function staircase(X, n) {
     return solution(X, n, [], 0)
