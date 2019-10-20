@@ -13,18 +13,15 @@ What if, instead of being able to climb 1 or 2 steps at a time, you could climb 
 function staircase(X, n) {
     return solution(X, n, [], 0)
 
-    function solution(stepNumbers, remainingSteps, acc, result) {
-        for (let i = 0; i < stepNumbers.length; i++) {
-            let step = stepNumbers[i]
-            if (remainingSteps - step > 0) {
+    function solution(steps, n, acc, result) {
+        for (let i = 0; i < steps.length; i++) {
+            let step = steps[i]
+            if (n - step > 0) {
                 acc.push(step)
-                result = solution(stepNumbers, remainingSteps - step, acc, result)
-            } else if (remainingSteps - step === 0) {
-                acc.push(step)
-                result += 1
-                acc.pop()
-                return result
-            } else if (remainingSteps - step < 0)
+                result = solution(steps, n - step, acc, result)
+            } else if (n - step === 0) {
+                return ++result
+            } else if (n - step < 0)
                 return
             acc.pop()
         }
