@@ -1,4 +1,4 @@
-## Staircase problem
+## 1/2 Staircase problem
 https://www.dailycodingproblem.com/blog/staircase-problem/
 
 There exists a staircase with N steps, and you can climb up either 1 or 2 steps at a time.
@@ -28,7 +28,7 @@ function staircase(X, n) {
 }
 ```
 
-## Array inversions
+## 2/2 Array inversions
 
 We can determine how "out of order" an array A is by counting the number of inversions it has. Two elements `A[i]` and `A[j]` form an inversion if `A[i]` > `A[j]` but `i` < `j`. That is, a smaller element appears after a larger element.
 
