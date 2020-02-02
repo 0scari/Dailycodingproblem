@@ -40,7 +40,7 @@ You may assume each element in the array is distinct.
 ```javascript
 // The solution uses unbalanced binary search tree.
 // If it were explicitly stated the input array could be modified,
-// a better option would've been in-place Insertion Sort.
+// a better option would be the in-place Insertion Sort.
 
 let test1 = [2, 4, 1, 3, 5]  // res: 3
 let test2 = [5, 4, 3, 2, 1]  // res: 10
