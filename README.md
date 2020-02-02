@@ -39,10 +39,7 @@ You may assume each element in the array is distinct.
 #### My solution in JS
 ```javascript
 // The solution uses unbalanced binary search tree.
-// P.S. I probably should've used the Insertion Sort.
-
-let test1 = [2, 4, 1, 3, 5]  // res: 3
-let test2 = [5, 4, 3, 2, 1]  // res: 10
+// P.S. I probably should've used the Insertion or Merge Sort.
 
 function countInversions(list) {
    let tree = new InversionCountingTree()
@@ -69,20 +66,19 @@ class InversionCountingTree {
       node.childNodeCount++
       if (newValue > node.value) {
          if (inversionCount === 0) inversionCount = node.childNodeCount
-         insert(node.greaterNode)
-      } else {
-         insert(node.lesserNode)
-      }
-      return inversionCount
-
-      function insert(nextNode) {
-         // code broke for test1 after introducing this function
-         if (nextNode) {
-            return this._insertAndCountRec(node, newValue, inversionCount)
+         if (node.greaterNode) {
+            inversionCount = this._insertAndCountRec(node.greaterNode, newValue, inversionCount)
          } else {
-            nextNode = new Node(newValue)
+            node.greaterNode = new Node(newValue)
+         }
+      } else {
+         if (node.lesserNode) {
+            inversionCount = this._insertAndCountRec(node.lesserNode, newValue, inversionCount)
+         } else {
+            node.lesserNode = new Node(newValue)
          }
       }
+      return inversionCount
    }
 }
 
@@ -94,5 +90,4 @@ class Node {
       this.childNodeCount = 0
    }
 }
-
 ```
