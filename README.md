@@ -27,3 +27,73 @@ function staircase(X, n) {
     }
 }
 ```
+
+## Array inversions
+
+We can determine how "out of order" an array A is by counting the number of inversions it has. Two elements `A[i]` and `A[j]` form an inversion if `A[i]` > `A[j]` but `i` < `j`. That is, a smaller element appears after a larger element.
+
+Given an array, count the number of inversions it has. Do this faster than O(N^2) time.
+
+You may assume each element in the array is distinct.
+
+#### My solution in JS
+```javascript
+// The solution uses unbalanced binary search tree.
+// If it were explicitly stated the input array could be modified,
+// a better option would've been in-place Insertion Sort.
+
+let test1 = [2, 4, 1, 3, 5]  // res: 3
+let test2 = [5, 4, 3, 2, 1]  // res: 10
+
+function countInversions(list) {
+   let tree = new InversionCountingTree()
+   for (var i = list.length - 1; i >= 0; i--) {
+      tree.insertAndCount(list[i])
+   }
+   return tree.inversionCount
+}
+
+class InversionCountingTree {
+   constructor() {
+      this.inversionCount = 0
+   }
+
+   insertAndCount(newValue) {
+      if (this.root) {
+         this.inversionCount += this._insertAndCountRec(this.root, newValue, 0)
+      } else {
+         this.root = new Node(newValue)
+      }
+   }
+
+   _insertAndCountRec(node, newValue, inversionCount) {
+      node.childNodeCount++
+      if (newValue > node.value) {
+         if (inversionCount === 0) inversionCount = node.childNodeCount
+         insert(node.greaterNode)
+      } else {
+         insert(node.lesserNode)
+      }
+      return inversionCount
+
+      function insert(nextNode) {
+         // code broke for test1 after introducing this function
+         if (nextNode) {
+            return this._insertAndCountRec(node, newValue, inversionCount)
+         } else {
+            nextNode = new Node(newValue)
+         }
+      }
+   }
+}
+
+class Node {
+   constructor(value) {
+      this.value = value
+      this.lesserNode
+      this.greaterNode
+      this.childNodeCount = 0
+   }
+}
+
+```
